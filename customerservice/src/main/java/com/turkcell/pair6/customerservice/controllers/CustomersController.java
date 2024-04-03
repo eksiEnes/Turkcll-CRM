@@ -2,9 +2,12 @@ package com.turkcell.pair6.customerservice.controllers;
 
 import com.turkcell.pair6.customerservice.entities.Customer;
 import com.turkcell.pair6.customerservice.services.dtos.requests.*;
+import com.turkcell.pair6.customerservice.services.dtos.responses.AddCustomerResponse;
 import com.turkcell.pair6.customerservice.services.dtos.responses.SearchCustomerResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import com.turkcell.pair6.customerservice.services.abstracts.CustomerService;
 
@@ -18,8 +21,9 @@ public class CustomersController {
     private final CustomerService customerService;
 
     @GetMapping
-    public List<Customer> getAll() {
-        return customerService.getAll();
+    public List<AddCustomerResponse> getAll(@RequestParam(defaultValue = "0") int pageNumber,
+                                 @RequestParam(defaultValue = "10") int pageSize) {
+        return customerService.getAll(PageRequest.of(pageNumber, pageSize));
     }
 
     @PostMapping("search")
@@ -27,16 +31,12 @@ public class CustomersController {
         return customerService.search(request);
     }
 
-    @PostMapping
-    public void add(@RequestBody @Valid AddCustomerRequest request)
-    {
-        customerService.add(request);
-    }
-
     @PostMapping("demographic")
-    public void add(@RequestBody @Valid AddDemographicRequest request)
+    public AddCustomerResponse add(@RequestBody @Valid AddDemographicRequest request)
     {
-        customerService.add(request);
+
+
+        return customerService.add(request);
     }
 
     @DeleteMapping
@@ -45,8 +45,8 @@ public class CustomersController {
     }
 
     @PutMapping
-    public void update(@RequestBody @Valid UpdateCustomerRequest updateCustomerRequest) {
-        customerService.update(updateCustomerRequest);
+    public AddCustomerResponse update(@RequestBody @Valid UpdateCustomerRequest updateCustomerRequest) {
+       return customerService.update(updateCustomerRequest);
     }
 
 }
