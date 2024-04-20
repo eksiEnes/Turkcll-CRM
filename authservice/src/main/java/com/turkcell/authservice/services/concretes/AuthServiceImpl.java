@@ -1,30 +1,40 @@
-package com.turkcell.authservice.core.configuration;
+package com.turkcell.authservice.services.concretes;
 
-import com.turkcell.configuration.BaseSecurityConfiguration;
-import com.turkcell.configuration.BaseSecurityService;
+import com.turkcell.jwt.JwtService;
+import com.turkcell.services.abstracts.UserService;
+import com.turkcell.services.dtos.requests.RegisterRequest;
+import com.turkcell.authservice.services.abstracts.AuthService;
+import com.turkcell.authservice.services.dtos.requests.LoginRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
-@Configuration
 @RequiredArgsConstructor
-public class SecurityConfiguration {
-
-    private final BaseSecurityService baseSecurityService;
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
-    {
-        baseSecurityService.configureCoreSecurity(http);
-        http
-                .authorizeHttpRequests(req -> req
-                        .requestMatchers(HttpMethod.POST, "/api/v1/test/**").hasAnyAuthority("admin")
-                        .anyRequest().authenticated()
-                );
-        return http.build();
+@Service
+public class AuthServiceImpl implements AuthService {
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
+    private final UserService userService;
+    @Override
+    public void register(RegisterRequest request) {
+        userService.add(request);
     }
 
+    @Override
+    public String login(LoginRequest request) {
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+
+        if(!authentication.isAuthenticated())
+            throw new RuntimeException("E-posta veya şifre hatalı.");
+
+        UserDetails user = userService.loadUserByUsername(request.getEmail());
+
+        return jwtService.generateToken(user.getUsername());
+    }
 }
