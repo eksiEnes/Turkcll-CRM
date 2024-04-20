@@ -1,38 +1,30 @@
-package com.turkcell.authservice.services.concretes;
+package com.turkcell.authservice.core.configuration;
 
-import com.turkcell.authservice.core.jwt.JwtService;
-import com.turkcell.authservice.services.abstracts.AuthService;
-import com.turkcell.authservice.services.abstracts.UserService;
-import com.turkcell.authservice.services.dtos.requests.LoginRequest;
-import com.turkcell.authservice.services.dtos.requests.RegisterRequest;
+import com.turkcell.configuration.BaseSecurityConfiguration;
+import com.turkcell.configuration.BaseSecurityService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 
+@Configuration
 @RequiredArgsConstructor
-@Service
-public class AuthServiceImpl implements AuthService {
-    private final AuthenticationManager authenticationManager;
-    private final JwtService jwtService;
-    private final UserService userService;
-    @Override
-    public void register(RegisterRequest request) {
-        userService.add(request);
+public class SecurityConfiguration {
+
+    private final BaseSecurityService baseSecurityService;
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
+    {
+        baseSecurityService.configureCoreSecurity(http);
+        http
+                .authorizeHttpRequests(req -> req
+                        .requestMatchers(HttpMethod.POST, "/api/v1/test/**").hasAnyAuthority("admin")
+                        .anyRequest().authenticated()
+                );
+        return http.build();
     }
 
-    @Override
-    public String login(LoginRequest request) {
-        Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-
-        if(!authentication.isAuthenticated())
-            throw new RuntimeException("Mail address or password is incorrect");
-
-        UserDetails user = userService.loadUserByUsername(request.getEmail());
-
-        return jwtService.generateToken(user.getUsername());
-    }
 }
