@@ -1,6 +1,6 @@
 package com.turkcell.authservice.services.abstracts;
 
-import com.turkcell.services.dtos.requests.RegisterRequest;
+import com.turkcell.authservice.services.dtos.requests.RegisterRequest;
 import com.turkcell.authservice.services.dtos.requests.LoginRequest;
 
 public interface AuthService {
