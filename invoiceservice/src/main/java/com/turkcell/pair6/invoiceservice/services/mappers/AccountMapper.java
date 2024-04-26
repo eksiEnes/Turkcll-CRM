@@ -14,7 +14,6 @@ import org.mapstruct.factory.Mappers;
 public interface AccountMapper {
     AccountMapper INSTANCE = Mappers.getMapper(AccountMapper.class);
 
-    @Mapping(source="address", target="address")
     Account accountFromAddRequest(AddBillingRequest request);
 
     AccountResponse accountResponseFromAccount(Account account);

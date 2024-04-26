@@ -1,6 +1,5 @@
 package com.turkcell.pair6.invoiceservice.services.dtos.requests;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,10 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AddressRequest {
     private String city;
-
     private String street;
-
     private String houseNumber;
-
     private String description;
 }

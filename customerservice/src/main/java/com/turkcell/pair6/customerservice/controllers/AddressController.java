@@ -32,9 +32,9 @@ public class AddressController {
     }
 
     @PostMapping
-    public void add(@RequestBody @Valid AddAddressRequest request)
+    public int add(@RequestBody @Valid AddAddressRequest request)
     {
-        addressService.add(request);
+        return addressService.add(request);
     }
 
     @DeleteMapping

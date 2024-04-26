@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface AddressService {
     List<AddressResponse> getAll(Pageable pageable);
 
-    void add(AddAddressRequest request);
+    int add(AddAddressRequest request);
 
     void delete(int id);
 

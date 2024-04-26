@@ -35,8 +35,8 @@ public class Account extends BaseEntity {
     @Column(name = "description")
     private String description;
 
-    @OneToOne(mappedBy = "account")
-    private Address address;
+    @Column(name = "addressId")
+    private int addressId;
 
     @Column(name = "customerId")
     private int customerId;

@@ -29,10 +29,11 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public void add(AddAddressRequest request) {
+    public int add(AddAddressRequest request) {
         addressBusinessRules.isCustomerIdExist(request.getCustomerId());
         Address address = AddressMapper.INSTANCE.addressFromAddRequest(request);
         addressRepository.save(address);
+        return address.getId();
     }
 
     @Override

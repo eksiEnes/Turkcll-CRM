@@ -6,9 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name = "addresses")
-@Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Address extends BaseEntity {

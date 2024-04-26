@@ -1,7 +1,9 @@
 package com.turkcell.pair6.invoiceservice.services.dtos.requests;
 
-import com.turkcell.pair6.invoiceservice.entities.Address;
+import com.turkcell.pair6.customerservice.core.service.constants.Messages;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,13 +13,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateAccountRequest {
-    @Min(1)
-    private int id;
-
-    private String name;
-
+public class AddAddressRequest {
+    private String city;
+    private String street;
+    private String houseNumber;
     private String description;
-
-    private AddressRequest address;
+    private int customerId;
 }
