@@ -30,8 +30,8 @@ public class AccountController {
     }
 
     @DeleteMapping
-    public void delete(int id){
-        accountService.delete(id);
+    public String delete(int id){
+        return accountService.delete(id);
     }
 
     @PutMapping

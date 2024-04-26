@@ -1,6 +1,7 @@
 package com.turkcell.pair6.invoiceservice.services.concretes;
 
 import com.turkcell.pair6.invoiceservice.clients.CustomerServiceClient;
+import com.turkcell.pair6.invoiceservice.clients.ProductServiceClient;
 import com.turkcell.pair6.invoiceservice.entities.Account;
 import com.turkcell.pair6.invoiceservice.repositories.AccountRepository;
 import com.turkcell.pair6.invoiceservice.services.abstracts.AccountService;
@@ -24,6 +25,7 @@ import java.util.Optional;
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final CustomerServiceClient customerServiceClient;
+    private final ProductServiceClient productServiceClient;
 
     @Override
     public List<AccountResponse> getAll(Pageable pageable) {
@@ -42,8 +44,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void delete(int id) {
-        accountRepository.deleteById(id);
+    public String delete(int id) {
+        if (!productServiceClient.hasAccountProduct(id)){
+            accountRepository.deleteById(id);
+            return "Customer account deleted successfully";
+        }
+        else
+            return "This billing account cannot be deleted because there is a product linked to this billing account";
     }
 
     @Override

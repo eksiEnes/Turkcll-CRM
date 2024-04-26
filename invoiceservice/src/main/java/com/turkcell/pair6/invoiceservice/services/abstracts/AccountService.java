@@ -12,7 +12,7 @@ public interface AccountService {
 
     void add(AddBillingRequest request);
 
-    void delete(int id);
+    String delete(int id);
 
     void update(UpdateAccountRequest updateAccountRequest);
 }
