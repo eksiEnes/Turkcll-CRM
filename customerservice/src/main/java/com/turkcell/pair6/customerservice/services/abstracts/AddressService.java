@@ -3,6 +3,7 @@ package com.turkcell.pair6.customerservice.services.abstracts;
 
 import com.turkcell.pair6.customerservice.entities.Address;
 import com.turkcell.pair6.customerservice.services.dtos.requests.AddAddressRequest;
+import com.turkcell.pair6.customerservice.services.dtos.requests.SetPrimaryAdressRequest;
 import com.turkcell.pair6.customerservice.services.dtos.requests.UpdateAddressRequest;
 import com.turkcell.pair6.customerservice.services.dtos.responses.AddressResponse;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,9 @@ public interface AddressService {
     void delete(int id);
 
     void update(UpdateAddressRequest updateAddressRequest);
+
+
+    void setprimary(SetPrimaryAdressRequest request);
 
     Optional<Address> getById(int id);
 }

@@ -28,6 +28,8 @@ public interface CustomerRepository extends JpaRepository<IndividualCustomer, In
 
     Optional<IndividualCustomer> findByNationalityId(String nationalityId);
 
+
+
     @Modifying
     @Query("DELETE FROM IndividualCustomer c WHERE c.nationalityId = :nationalityId")
     void deleteByNationalityId(@Param("nationalityId") String nationalityId);

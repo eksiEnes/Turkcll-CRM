@@ -9,6 +9,7 @@ import com.turkcell.pair6.customerservice.services.abstracts.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -24,6 +25,16 @@ public class AddressBusinessRules {
         }
     }
 
+    public void isAddressIdExist(int id){
+
+        Optional<Address> optionalAddress = addressRepository.findById(id);
+        Address address = optionalAddress.orElse(null);
+
+        if (address == null)
+            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.CUSTOMER_HAS_NOT_MORE_THAN_ONE_ADDRESS));
+//        TODO : ADDRESS_DOES_NOT_EXİST  hata mesajı lazım
+    }
+
     public void hasCustomerMoreThanOneAddress(int id) {
         Optional<Address> optionalAddress = addressRepository.findById(id);
         Address address = optionalAddress.orElse(null);
@@ -31,4 +42,16 @@ public class AddressBusinessRules {
         if (address.getCustomer().getAddresses().size() <= 1)
             throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.CUSTOMER_HAS_NOT_MORE_THAN_ONE_ADDRESS));
     }
+
+
+
+    public List<Address> hasCustomerPrimaryAdress(int id) {
+
+
+        List<Address> optionalAddress = addressRepository.findByCustomerIdAndIsprimaryTrue(id);
+//        TODO: addrees yoksa hata dön
+        return optionalAddress;
+
+    }
 }
+

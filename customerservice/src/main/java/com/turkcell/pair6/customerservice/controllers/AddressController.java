@@ -3,6 +3,7 @@ package com.turkcell.pair6.customerservice.controllers;
 import com.turkcell.pair6.customerservice.entities.Address;
 import com.turkcell.pair6.customerservice.services.abstracts.AddressService;
 import com.turkcell.pair6.customerservice.services.dtos.requests.AddAddressRequest;
+import com.turkcell.pair6.customerservice.services.dtos.requests.SetPrimaryAdressRequest;
 import com.turkcell.pair6.customerservice.services.dtos.requests.UpdateAddressRequest;
 import com.turkcell.pair6.customerservice.services.dtos.responses.AddressResponse;
 import jakarta.validation.Valid;
@@ -42,8 +43,13 @@ public class AddressController {
         addressService.delete(id);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public void update(@RequestBody @Valid UpdateAddressRequest updateAddressRequest) {
         addressService.update(updateAddressRequest);
+    }
+
+    @PutMapping("/set-primary")
+    public void makeprimary(@RequestBody @Valid SetPrimaryAdressRequest request) {
+        addressService.setprimary(request);
     }
 }

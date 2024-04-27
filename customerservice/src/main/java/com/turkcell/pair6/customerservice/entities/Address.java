@@ -26,6 +26,9 @@ public class Address extends BaseEntity {
     @Column(name = "house_number")
     private String houseNumber;
 
+    @Column(name = "is_primary")
+    private boolean isprimary;
+
     @Column(name = "description")
     private String description;
 

@@ -1,9 +1,11 @@
 package com.turkcell.pair6.customerservice.services.concretes;
 
 import com.turkcell.pair6.customerservice.entities.Address;
+import com.turkcell.pair6.customerservice.entities.Customer;
 import com.turkcell.pair6.customerservice.repositories.AddressRepository;
 import com.turkcell.pair6.customerservice.services.abstracts.AddressService;
 import com.turkcell.pair6.customerservice.services.dtos.requests.AddAddressRequest;
+import com.turkcell.pair6.customerservice.services.dtos.requests.SetPrimaryAdressRequest;
 import com.turkcell.pair6.customerservice.services.dtos.requests.UpdateAddressRequest;
 import com.turkcell.pair6.customerservice.services.dtos.responses.AddressResponse;
 import com.turkcell.pair6.customerservice.services.mappers.AddressMapper;
@@ -51,8 +53,33 @@ public class AddressServiceImpl implements AddressService {
         addressRepository.save(updatedAddress);
     }
 
+
+    @Override
+    public void setprimary(SetPrimaryAdressRequest request) {
+        addressBusinessRules.isCustomerIdExist(request.getCustomerId());
+        List<Address>  primaryAdresslist = addressBusinessRules.hasCustomerPrimaryAdress(request.getCustomerId());
+
+        for (Address addres : primaryAdresslist){
+            addres.setIsprimary(false);
+        }
+
+        Optional<Address> optionalAddress = addressRepository.findById(request.getAddressId());
+
+        addressBusinessRules.isAddressIdExist(request.getAddressId());
+
+        if (optionalAddress.isPresent()) {
+            Address address = optionalAddress.get();
+            address.setIsprimary(true);
+            addressRepository.save(address);
+        }
+
+    }
+
     @Override
     public Optional<Address> getById(int id) {
         return addressRepository.findById(id);
     }
+
+
+
 }
