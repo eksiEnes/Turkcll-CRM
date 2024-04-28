@@ -1,4 +1,4 @@
-package com.turkcell.pair6.customerservice.core.exception.details;
+package com.turkcell.pair6.invoiceservice.core.exception.details;
 
 import lombok.Getter;
 import lombok.Setter;

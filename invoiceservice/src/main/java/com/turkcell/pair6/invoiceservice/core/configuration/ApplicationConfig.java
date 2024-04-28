@@ -1,4 +1,4 @@
-package com.turkcell.pair6.customerservice.core.configuration;
+package com.turkcell.pair6.invoiceservice.core.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

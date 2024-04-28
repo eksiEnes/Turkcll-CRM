@@ -1,4 +1,4 @@
-package com.turkcell.pair6.customerservice.core.exception.handlers;
+package com.turkcell.pair6.invoiceservice.core.exception.handlers;
 
 import com.turkcell.pair6.customerservice.core.exception.details.BusinessProblemDetails;
 import com.turkcell.pair6.customerservice.core.exception.details.ProblemDetails;

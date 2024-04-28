@@ -1,4 +1,4 @@
-package com.turkcell.pair6.customerservice.core.service.concretes;
+package com.turkcell.pair6.invoiceservice.core.service.concretes;
 
 import com.turkcell.pair6.customerservice.core.service.abstracts.ValidationHelperService;
 import org.springframework.stereotype.Service;
