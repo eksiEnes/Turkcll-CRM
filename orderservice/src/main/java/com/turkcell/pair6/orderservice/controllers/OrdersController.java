@@ -14,14 +14,6 @@ public class OrdersController {
 
     private final KafkaTemplate<String, OrderCreatedEvent> kafkaTemplate;
 
-    /*
-    @GetMapping
-    public int getCustomerIdByOrderId(@RequestParam String orderId){
-        //TODO: Mongodb'e gidip query ile çek.
-        return 10;
-    }
-    */
-
     @GetMapping("/hasProduct")
     boolean hasCustomerProduct(@RequestParam("customerNationalityId") String nationalityId)
     {
