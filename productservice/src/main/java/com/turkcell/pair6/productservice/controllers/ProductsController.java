@@ -1,16 +1,49 @@
 package com.turkcell.pair6.productservice.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.turkcell.pair6.productservice.entities.Product;
+import com.turkcell.pair6.productservice.services.abstracts.ProductService;
+import com.turkcell.pair6.productservice.services.dtos.requests.ProductRequest;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/products")
+@AllArgsConstructor
 public class ProductsController {
+
+    private final ProductService productService;
     @GetMapping("/hasProduct")
     boolean hasAccountProduct(@RequestParam("accountId") int accountId)
     {
         return false;
     }
+
+    @GetMapping
+    public List<Product> getAll(@RequestParam(defaultValue = "0") int pageNumber,
+                                @RequestParam(defaultValue = "10") int pageSize){
+        return productService.getAll(PageRequest.of(pageNumber, pageSize));
+
+    }
+
+    @PostMapping
+    void add(@RequestBody ProductRequest product){
+        productService.add(product);
+
+    }
+
+    @PutMapping()
+    void update(@RequestBody ProductRequest product){
+        productService.update(product);
+    }
+
+    @DeleteMapping()
+    public void delete(@RequestParam int id){
+        productService.delete(id);
+    }
+
+
+
 }
