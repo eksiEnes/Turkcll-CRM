@@ -31,8 +31,8 @@ public class AddressBusinessRules {
         Address address = optionalAddress.orElse(null);
 
         if (address == null)
-            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.CUSTOMER_HAS_NOT_MORE_THAN_ONE_ADDRESS));
-//        TODO : ADDRESS_DOES_NOT_EXİST  hata mesajı lazım
+            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.ADDRESS_DOES_NOT_EXİST));
+
     }
 
     public void hasCustomerMoreThanOneAddress(int id) {
@@ -49,7 +49,11 @@ public class AddressBusinessRules {
 
 
         List<Address> optionalAddress = addressRepository.findByCustomerIdAndIsprimaryTrue(id);
-//        TODO: addrees yoksa hata dön
+
+        if (optionalAddress == null)
+            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.ADDRESS_DOES_NOT_EXİST));
+
+
         return optionalAddress;
 
     }
