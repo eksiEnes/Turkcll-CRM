@@ -1,6 +1,4 @@
-package com.turkcell.pair6.productservice.services.dtos.requests;
-
-import com.turkcell.pair6.productservice.entities.Product;
+package com.turkcell.pair6.productservice.services.dtos.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,13 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDetailsRequest {
-
-
+public class ProductDetailsResponse {
     private String offerName;
-
     private String offerId;
-
     private String specId;
-
 }

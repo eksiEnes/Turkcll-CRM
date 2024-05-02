@@ -4,6 +4,8 @@ import com.turkcell.pair6.productservice.entities.Product;
 import com.turkcell.pair6.productservice.services.abstracts.ProductService;
 import com.turkcell.pair6.productservice.services.dtos.requests.ProductRequest;
 import com.turkcell.pair6.productservice.services.dtos.requests.ProductUpdateRequest;
+import com.turkcell.pair6.productservice.services.dtos.responses.ProductDetailsResponse;
+import com.turkcell.pair6.productservice.services.dtos.responses.ProductResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +24,17 @@ public class ProductsController {
         return false;
     }
 
-    @GetMapping
-    public List<Product> getAll(@RequestParam(defaultValue = "0") int pageNumber,
-                                @RequestParam(defaultValue = "10") int pageSize){
-        return productService.getAll(PageRequest.of(pageNumber, pageSize));
+    @GetMapping("/products")
+    public List<ProductResponse> getAllProduct(@RequestParam(defaultValue = "0") int pageNumber,
+                                        @RequestParam(defaultValue = "10") int pageSize){
+        return productService.getAllProduct(PageRequest.of(pageNumber, pageSize));
+
+    }
+
+    @GetMapping("/productsDetails")
+    public List<ProductDetailsResponse> getAllProductDetails(@RequestParam(defaultValue = "0") int pageNumber,
+                                               @RequestParam(defaultValue = "10") int pageSize){
+        return productService.getAllProductDetails(PageRequest.of(pageNumber, pageSize));
 
     }
 

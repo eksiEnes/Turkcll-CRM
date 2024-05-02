@@ -31,6 +31,12 @@ public class Product {
     @Column(name = "action")
     private String action;
 
-    @OneToOne(mappedBy = "product")
-    private ProductDetails productDetails;
+    @Column(name = "offer_name")
+    private String offerName;
+
+    @Column(name = "offer_id")
+    private String offerId;
+
+    @Column(name = "spec_id")
+    private String specId;
 }
