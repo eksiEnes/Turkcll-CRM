@@ -3,6 +3,7 @@ package com.turkcell.pair6.productservice.controllers;
 import com.turkcell.pair6.productservice.entities.Product;
 import com.turkcell.pair6.productservice.services.abstracts.ProductService;
 import com.turkcell.pair6.productservice.services.dtos.requests.ProductRequest;
+import com.turkcell.pair6.productservice.services.dtos.requests.ProductUpdateRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class ProductsController {
     }
 
     @PutMapping()
-    void update(@RequestBody ProductRequest product){
+    void update(@RequestBody ProductUpdateRequest product){
         productService.update(product);
     }
 

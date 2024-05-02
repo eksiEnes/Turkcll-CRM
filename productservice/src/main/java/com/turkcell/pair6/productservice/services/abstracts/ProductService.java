@@ -2,6 +2,7 @@ package com.turkcell.pair6.productservice.services.abstracts;
 
 import com.turkcell.pair6.productservice.entities.Product;
 import com.turkcell.pair6.productservice.services.dtos.requests.ProductRequest;
+import com.turkcell.pair6.productservice.services.dtos.requests.ProductUpdateRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -13,5 +14,5 @@ public interface ProductService {
 
     void delete(int id);
 
-    void update(ProductRequest product);
+    void update(ProductUpdateRequest product);
 }
