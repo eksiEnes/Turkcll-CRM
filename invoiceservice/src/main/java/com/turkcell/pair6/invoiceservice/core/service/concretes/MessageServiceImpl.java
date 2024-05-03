@@ -1,6 +1,6 @@
 package com.turkcell.pair6.invoiceservice.core.service.concretes;
 
-import com.turkcell.pair6.customerservice.core.service.abstracts.MessageService;
+import com.turkcell.pair6.invoiceservice.core.service.abstracts.MessageService;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;

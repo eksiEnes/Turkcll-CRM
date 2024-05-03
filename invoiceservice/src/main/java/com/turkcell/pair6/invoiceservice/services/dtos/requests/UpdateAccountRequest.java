@@ -1,6 +1,5 @@
 package com.turkcell.pair6.invoiceservice.services.dtos.requests;
 
-import com.turkcell.pair6.invoiceservice.entities.Address;
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
