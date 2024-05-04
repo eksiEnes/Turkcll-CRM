@@ -1,10 +1,9 @@
 package com.turkcell.pair6.customerservice.services.rules;
 
 import com.turkcell.pair6.customerservice.clients.OrderServiceClient;
-import com.turkcell.pair6.customerservice.core.exception.types.BusinessException;
-import com.turkcell.pair6.customerservice.core.service.abstracts.MessageService;
-import com.turkcell.pair6.customerservice.core.service.constants.Messages;
-import com.turkcell.pair6.customerservice.entities.Address;
+import com.turkcell.core.exceptions.types.BusinessException;
+import com.turkcell.core.service.abstracts.MessageService;
+import com.turkcell.core.service.constants.Messages;
 import com.turkcell.pair6.customerservice.entities.IndividualCustomer;
 import com.turkcell.pair6.customerservice.repositories.CustomerRepository;
 import com.turkcell.pair6.customerservice.services.dtos.requests.SearchCustomerRequest;

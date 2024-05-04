@@ -1,8 +1,10 @@
 package com.turkcell.pair6.invoiceservice.services.concretes;
 
+import com.turkcell.core.service.abstracts.MessageService;
+import com.turkcell.core.service.constants.Messages;
 import com.turkcell.pair6.invoiceservice.clients.CustomerServiceClient;
-import com.turkcell.pair6.invoiceservice.clients.ProductServiceClient;
 import com.turkcell.pair6.invoiceservice.entities.Account;
+import com.turkcell.pair6.invoiceservice.entities.AccountType;
 import com.turkcell.pair6.invoiceservice.repositories.AccountRepository;
 import com.turkcell.pair6.invoiceservice.services.abstracts.AccountService;
 import com.turkcell.pair6.invoiceservice.services.dtos.requests.AddAddressRequest;
@@ -12,6 +14,7 @@ import com.turkcell.pair6.invoiceservice.services.dtos.requests.UpdateAddressReq
 import com.turkcell.pair6.invoiceservice.services.dtos.responses.AccountResponse;
 import com.turkcell.pair6.invoiceservice.services.mappers.AccountMapper;
 import com.turkcell.pair6.invoiceservice.services.mappers.AddressMapper;
+import com.turkcell.pair6.invoiceservice.services.rules.AccountBusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +28,8 @@ import java.util.Optional;
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final CustomerServiceClient customerServiceClient;
-    private final ProductServiceClient productServiceClient;
+    private final MessageService messageService;
+    private final AccountBusinessRules businessRules;
 
     @Override
     public List<AccountResponse> getAll(Pageable pageable) {
@@ -39,18 +43,15 @@ public class AccountServiceImpl implements AccountService {
         AddAddressRequest addressRequest = AddressMapper.INSTANCE.addAddress(request.getAddress());
         addressRequest.setCustomerId(request.getCustomerId());
         account.setAddressId(customerServiceClient.add(addressRequest));
-        account.setType("billing");
+        account.setType(AccountType.BILLING);
         accountRepository.save(account);
     }
 
     @Override
     public String delete(int id) {
-        if (!productServiceClient.hasAccountProduct(id)){
-            accountRepository.deleteById(id);
-            return "Customer account deleted successfully";
-        }
-        else
-            return "This billing account cannot be deleted because there is a product linked to this billing account";
+        businessRules.hasAccountProduct(id);
+        accountRepository.deleteById(id);
+        return messageService.getMessage(Messages.ACCOUNT_DELETED);
     }
 
     @Override
