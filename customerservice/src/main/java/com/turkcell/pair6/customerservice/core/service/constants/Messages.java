@@ -4,6 +4,7 @@ public class Messages {
     public static class ValidationErrors{
         public static final String FIELD_NOT_BLANK = "{field.notBlank}";
         public static final String FIELD_NOT_NULL = "{field.notNull}";
+        public static final String SIZE_INVALID ="{field.inValid}";
     }
 
     public static class BusinessErrors{

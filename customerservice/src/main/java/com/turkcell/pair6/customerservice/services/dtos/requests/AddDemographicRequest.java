@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
+
 import java.time.LocalDate;
 
 @Getter
@@ -34,5 +36,6 @@ public class AddDemographicRequest {
     private String fatherName;
 
     @NotBlank(message = Messages.ValidationErrors.FIELD_NOT_BLANK)
+    @Length(min = 11, max = 11, message=Messages.ValidationErrors.SIZE_INVALID)
     private String nationalityId;
 }
