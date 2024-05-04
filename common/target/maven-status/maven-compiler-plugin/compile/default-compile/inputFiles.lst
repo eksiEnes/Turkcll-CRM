@@ -1,0 +1,13 @@
+C:\Users\ferha\Documents\GitHub\Turkcll-CRM\common\src\main\java\com\turkcell\core\entities\BaseEntity.java
+C:\Users\ferha\Documents\GitHub\Turkcll-CRM\common\src\main\java\com\turkcell\core\exceptions\details\BusinessProblemDetails.java
+C:\Users\ferha\Documents\GitHub\Turkcll-CRM\common\src\main\java\com\turkcell\core\exceptions\types\BusinessException.java
+C:\Users\ferha\Documents\GitHub\Turkcll-CRM\common\src\main\java\com\turkcell\core\service\constants\Messages.java
+C:\Users\ferha\Documents\GitHub\Turkcll-CRM\common\src\main\java\com\turkcell\core\service\concretes\MessageServiceImpl.java
+C:\Users\ferha\Documents\GitHub\Turkcll-CRM\common\src\main\java\com\turkcell\core\service\abstracts\ValidationHelperService.java
+C:\Users\ferha\Documents\GitHub\Turkcll-CRM\common\src\main\java\com\turkcell\core\configuration\ApplicationConfig.java
+C:\Users\ferha\Documents\GitHub\Turkcll-CRM\common\src\main\java\com\turkcell\core\exceptions\details\ProblemDetails.java
+C:\Users\ferha\Documents\GitHub\Turkcll-CRM\common\src\main\java\com\turkcell\core\exceptions\details\ValidationProblemDetails.java
+C:\Users\ferha\Documents\GitHub\Turkcll-CRM\common\src\main\java\com\turkcell\core\service\concretes\ValidationHelperServiceImpl.java
+C:\Users\ferha\Documents\GitHub\Turkcll-CRM\common\src\main\java\com\turkcell\App.java
+C:\Users\ferha\Documents\GitHub\Turkcll-CRM\common\src\main\java\com\turkcell\core\service\abstracts\MessageService.java
+C:\Users\ferha\Documents\GitHub\Turkcll-CRM\common\src\main\java\com\turkcell\core\exceptions\handlers\GlobalExceptionHandler.java

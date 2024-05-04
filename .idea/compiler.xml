@@ -8,10 +8,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="gatewayserver" />
-        <module name="discoveryserver" />
-        <module name="configserver" />
         <module name="common" />
         <module name="authservice" />
+        <module name="discoveryserver" />
+        <module name="customerservice (1)" />
+        <module name="configserver" />
         <module name="orderservice" />
       </profile>
       <profile name="Annotation profile for productservice" enabled="true">
@@ -36,6 +37,7 @@
       <module name="common" options="-parameters" />
       <module name="configserver" options="-parameters" />
       <module name="customerservice" options="-parameters" />
+      <module name="customerservice (1)" options="-parameters" />
       <module name="discoveryserver" options="-parameters" />
       <module name="gatewayserver" options="-parameters" />
       <module name="invoiceservice" options="-parameters" />
