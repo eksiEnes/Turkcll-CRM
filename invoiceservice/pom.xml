@@ -20,6 +20,13 @@
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
 	</properties>
 	<dependencies>
+
+		<dependency>
+			<groupId>com.turkcell</groupId>
+			<artifactId>core</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>

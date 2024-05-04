@@ -43,7 +43,7 @@ public class AddressController {
         addressService.delete(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     public void update(@RequestBody @Valid UpdateAddressRequest updateAddressRequest) {
         addressService.update(updateAddressRequest);
     }
