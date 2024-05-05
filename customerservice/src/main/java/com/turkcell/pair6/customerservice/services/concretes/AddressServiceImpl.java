@@ -41,7 +41,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public void delete(int id) {
         addressBusinessRules.hasCustomerMoreThanOneAddress(id);
-        addressRepository.deleteById(id);
+        addressRepository.deactivateByAddressId(id);
     }
 
     @Override

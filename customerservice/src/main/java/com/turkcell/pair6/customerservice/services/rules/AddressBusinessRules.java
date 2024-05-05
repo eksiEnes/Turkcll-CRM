@@ -36,7 +36,8 @@ public class AddressBusinessRules {
     }
 
     public void hasCustomerMoreThanOneAddress(int id) {
-        Optional<Address> optionalAddress = addressRepository.findById(id);
+
+        Optional<Address> optionalAddress = addressRepository.findPrimaryAddressesByCustomerId(id);
         Address address = optionalAddress.orElse(null);
 
         if (address.getCustomer().getAddresses().size() <= 1)
