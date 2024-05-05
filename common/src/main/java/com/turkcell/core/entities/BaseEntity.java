@@ -19,6 +19,9 @@ public class BaseEntity {
     @Column(name="deletedDate")
     private LocalDateTime deletedDate;
 
+    @Column(name = "isActive")
+    private boolean isActive = true;
+
     @PrePersist
     public void onCreate()
     {
@@ -35,5 +38,6 @@ public class BaseEntity {
     public void onDelete()
     {
         deletedDate = LocalDateTime.now();
+        this.isActive = false;
     }
 }
