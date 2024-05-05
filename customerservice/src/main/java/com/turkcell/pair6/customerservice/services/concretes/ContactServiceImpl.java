@@ -33,7 +33,8 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public void delete(int id) {
-        contactRepository.deleteById(id);
+
+        contactRepository.deactivateByContactId(id);
     }
 
     @Override

@@ -18,4 +18,10 @@ public class ContactBusinessRules {
             throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.CUSTOMER_WITH_THAT_ID_NOT_EXIST));
         }
     }
+
+    public void isContactIdExist(int id) {
+        if (!customerService.isCustomerIdExist(id)) {
+            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.CUSTOMER_WITH_THAT_ID_NOT_EXIST));
+        }
+    }
 }
