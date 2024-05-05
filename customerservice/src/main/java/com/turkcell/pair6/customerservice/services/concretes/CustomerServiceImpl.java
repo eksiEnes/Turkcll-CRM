@@ -51,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public void delete(String nationalityId) {
         customerBusinessRules.hasCustomerProduct(nationalityId);
-        customerRepository.deleteByNationalityId(nationalityId);
+        customerRepository.deactivateByNationalityId(nationalityId);
     }
 
     @Override

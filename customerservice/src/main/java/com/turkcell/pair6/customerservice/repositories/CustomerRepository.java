@@ -4,6 +4,7 @@ import com.turkcell.pair6.customerservice.entities.Customer;
 import com.turkcell.pair6.customerservice.entities.IndividualCustomer;
 import com.turkcell.pair6.customerservice.services.dtos.requests.SearchCustomerRequest;
 import com.turkcell.pair6.customerservice.services.dtos.responses.SearchCustomerResponse;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -30,7 +31,10 @@ public interface CustomerRepository extends JpaRepository<IndividualCustomer, In
 
 
 
+    //kontrol et Transactional
+
     @Modifying
-    @Query("DELETE FROM IndividualCustomer c WHERE c.nationalityId = :nationalityId")
-    void deleteByNationalityId(@Param("nationalityId") String nationalityId);
+    @Transactional
+    @Query("UPDATE IndividualCustomer c SET c.isActive = false WHERE c.nationalityId = :nationalityId")
+    void deactivateByNationalityId(@Param("nationalityId") String nationalityId);
 }
