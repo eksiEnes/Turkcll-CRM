@@ -20,7 +20,12 @@ public class Messages {
         public static final String CUSTOMER_WITH_THAT_ID_NOT_EXIST="customer.withThatIdNotExist";
 
         public static final String CUSTOMER_HAS_NOT_MORE_THAN_ONE_ADDRESS = "customer.hasNotMoreThanOneAddress";
-        public static final String ADDRESS_DOES_NOT_EXİST = "address.doesNotExist";
+        public static final String ADDRESS_DOES_NOT_EXIST = "address.doesNotExist";
         public static final String ACCOUNT_HAS_PRODUCT = "account.hasProduct";
+
+        public static final String CONTACT_DOES_NOT_EXIST = "contact.doesNotExist";
+        public static final String CONTACT_HAS_ALREADY_EXIST = "contact.alreadyHasContact";
+        public static final String PRODUCT_DOES_NOT_EXIST = "product.doesNotExist";
+        public static final String PRODUCT_WITH_THIS_PRODUCTNO_ALREADY_EXIST = "product.thisProductNoAlreadyExist";
     }
 }
