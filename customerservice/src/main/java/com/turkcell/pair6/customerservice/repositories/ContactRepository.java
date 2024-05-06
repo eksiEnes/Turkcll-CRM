@@ -23,7 +23,7 @@ public interface ContactRepository extends JpaRepository<Contact, Integer> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE Contact c SET c.isActive = false WHERE c.id = :contactId")
+    @Query("UPDATE Contact c SET c.isActive = false, c.deletedDate = CURRENT_TIMESTAMP WHERE c.id = :contactId")
     void deactivateByContactId(@Param("contactId") int contactId);
 
     @Query("SELECT c FROM Contact c WHERE c.customer.id = :customerId AND c.isActive = true")

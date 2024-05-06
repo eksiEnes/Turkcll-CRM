@@ -25,7 +25,7 @@ public interface AddressRepository extends JpaRepository<Address, Integer> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE Address a SET a.isActive = false WHERE a.id = :addressId")
+    @Query("UPDATE Address a SET a.isActive = false, a.deletedDate = CURRENT_TIMESTAMP WHERE a.id = :addressId")
     void deactivateByAddressId(@Param("addressId") int addressId);
 
 

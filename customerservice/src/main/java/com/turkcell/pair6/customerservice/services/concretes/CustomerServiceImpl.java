@@ -53,6 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
         customerBusinessRules.hasCustomerProduct(nationalityId);
         customerBusinessRules.customerNatIdExist(nationalityId);
         customerRepository.deactivateByNationalityId(nationalityId);
+
     }
 
     @Override

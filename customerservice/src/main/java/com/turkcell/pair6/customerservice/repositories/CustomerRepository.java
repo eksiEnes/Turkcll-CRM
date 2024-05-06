@@ -41,6 +41,6 @@ public interface CustomerRepository extends JpaRepository<IndividualCustomer, In
 
     @Modifying
     @Transactional
-    @Query("UPDATE IndividualCustomer c SET c.isActive = false WHERE c.nationalityId = :nationalityId")
+    @Query("UPDATE IndividualCustomer c SET c.isActive = false, c.deletedDate = CURRENT_TIMESTAMP WHERE c.nationalityId = :nationalityId")
     void deactivateByNationalityId(@Param("nationalityId") String nationalityId);
 }

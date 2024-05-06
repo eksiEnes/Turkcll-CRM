@@ -37,7 +37,6 @@ public class BaseEntity {
     @PreRemove
     public void onDelete()
     {
-        //TODO Kaldırılcak onUpdate e eklenip isActive false yapılcak
         deletedDate = LocalDateTime.now();
         this.isActive = false;
     }
