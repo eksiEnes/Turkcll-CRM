@@ -1,7 +1,9 @@
 package com.turkcell.core.service.constants;
 
 public class Messages {
-    public static final String ACCOUNT_DELETED = "{account.deleted}";
+
+
+
 
     public static class ValidationErrors{
         public static final String FIELD_NOT_BLANK = "{field.notBlank}";
@@ -23,10 +25,13 @@ public class Messages {
         public static final String ADDRESS_DOES_NOT_EXIST = "address.doesNotExist";
         public static final String ACCOUNT_HAS_PRODUCT = "account.hasProduct";
 
+        public static final String ACCOUNT_DELETED = "account.deleted";
+
         public static final String CONTACT_DOES_NOT_EXIST = "contact.doesNotExist";
         public static final String CONTACT_HAS_ALREADY_EXIST = "contact.alreadyHasContact";
         public static final String PRODUCT_DOES_NOT_EXIST = "product.doesNotExist";
         public static final String PRODUCT_WITH_THIS_PRODUCTNO_ALREADY_EXIST = "product.thisProductNoAlreadyExist";
         public static final String THIS_ADDRESS_NOT_BELONG_THIS_CUSTOMER = "address.thisAddressNotBelongThisCustomer";
+        public static final String ACCOUNT_DOES_NOT_EXIST = "account.doesNotExist";
     }
 }
