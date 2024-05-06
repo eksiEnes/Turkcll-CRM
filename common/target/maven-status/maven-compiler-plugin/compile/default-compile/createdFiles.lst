@@ -1,8 +1,10 @@
 com\turkcell\core\exceptions\details\ProblemDetails.class
 com\turkcell\core\exceptions\handlers\GlobalExceptionHandler.class
+com\turkcell\core\configuration\feign\FeignClientInterceptor.class
 com\turkcell\core\exceptions\details\ValidationProblemDetails.class
 com\turkcell\core\service\abstracts\ValidationHelperService.class
 com\turkcell\core\service\abstracts\MessageService.class
+com\turkcell\core\configuration\feign\FeignClientConfiguration.class
 com\turkcell\core\configuration\ApplicationConfig.class
 com\turkcell\core\entities\BaseEntity.class
 com\turkcell\core\service\concretes\ValidationHelperServiceImpl.class

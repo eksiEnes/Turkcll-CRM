@@ -51,6 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public void delete(String nationalityId) {
         customerBusinessRules.hasCustomerProduct(nationalityId);
+        customerBusinessRules.customerNatIdExist(nationalityId);
         customerRepository.deactivateByNationalityId(nationalityId);
     }
 
@@ -69,7 +70,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public boolean isCustomerIdExist(int id) {
-        Optional<IndividualCustomer> customer = customerRepository.findById(id);
+        Optional<IndividualCustomer> customer = customerRepository.findActiveCustomerById(id);
         return customer.isPresent();
     }
 

@@ -27,5 +27,6 @@ public class Messages {
         public static final String CONTACT_HAS_ALREADY_EXIST = "contact.alreadyHasContact";
         public static final String PRODUCT_DOES_NOT_EXIST = "product.doesNotExist";
         public static final String PRODUCT_WITH_THIS_PRODUCTNO_ALREADY_EXIST = "product.thisProductNoAlreadyExist";
+        public static final String THIS_ADDRESS_NOT_BELONG_THIS_CUSTOMER = "address.thisAddressNotBelongThisCustomer";
     }
 }

@@ -33,7 +33,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public void delete(int id) {
-
+        contactBusinessRules.isContactIdExist(id);
         contactRepository.deactivateByContactId(id);
     }
 

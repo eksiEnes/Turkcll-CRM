@@ -6,6 +6,7 @@ import com.turkcell.core.service.constants.Messages;
 import com.turkcell.pair6.customerservice.entities.Address;
 import com.turkcell.pair6.customerservice.repositories.AddressRepository;
 import com.turkcell.pair6.customerservice.services.abstracts.CustomerService;
+import com.turkcell.pair6.customerservice.services.dtos.requests.SetPrimaryAdressRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -55,18 +56,16 @@ public class AddressBusinessRules {
 
 
 
-    public List<Address> hasCustomerPrimaryAdress(int id) {
-
-
+    public void hasCustomerPrimaryAdress(int id) {
         List<Address> optionalAddress = addressRepository.findByCustomerIdAndIsprimaryTrue(id);
-
         if (optionalAddress == null)
             throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.ADDRESS_DOES_NOT_EXIST));
-
-
-        return optionalAddress;
-
     }
 
+    public void isAddressBelongToThisCustomer(SetPrimaryAdressRequest request) {
+        Address address = addressRepository.findActiveAddressById(request.getAddressId()).orElse(null);
+        if (address.getCustomer().getId() != request.getCustomerId())
+            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.THIS_ADDRESS_NOT_BELONG_THIS_CUSTOMER));
+    }
 }
 

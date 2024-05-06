@@ -36,9 +36,8 @@ public interface CustomerRepository extends JpaRepository<IndividualCustomer, In
     @Query("Select c FROM IndividualCustomer c WHERE c.nationalityId = :nationalityId AND c.isActive = true ")
     Optional<IndividualCustomer> findActiveCustomerByNationalityId(String nationalityId);
 
-
-
-    //kontrol et Transactional
+    @Query("Select c FROM IndividualCustomer c WHERE c.id = :id AND c.isActive = true ")
+    Optional<IndividualCustomer> findActiveCustomerById(int id);
 
     @Modifying
     @Transactional

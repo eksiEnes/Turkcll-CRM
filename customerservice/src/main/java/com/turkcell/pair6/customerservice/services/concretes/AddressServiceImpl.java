@@ -59,20 +59,19 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public void setprimary(SetPrimaryAdressRequest request) {
         addressBusinessRules.isCustomerIdExist(request.getCustomerId());
-        List<Address>  primaryAddresslist = addressBusinessRules.hasCustomerPrimaryAdress(request.getCustomerId());
+        addressBusinessRules.isAddressIdExist(request.getAddressId());
+        addressBusinessRules.isAddressBelongToThisCustomer(request);
 
+        List<Address>  primaryAddresslist = addressRepository.findByCustomerIdAndIsprimaryTrue(request.getCustomerId());
         for (Address address : primaryAddresslist){
             address.setIsprimary(false);
         }
 
-        addressBusinessRules.isAddressIdExist(request.getAddressId());
         Address address = addressRepository.findById(request.getAddressId()).orElse(null);
-
         if (address != null) {
             address.setIsprimary(true);
             addressRepository.save(address);
         }
-
     }
 
     @Override

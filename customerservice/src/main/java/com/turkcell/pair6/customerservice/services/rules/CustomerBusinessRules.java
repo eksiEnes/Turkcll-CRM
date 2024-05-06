@@ -45,7 +45,6 @@ public class CustomerBusinessRules {
     }
 
     public void hasCustomerProduct(String nationalityId) {
-        // TODO FEIGN CLIENT BAGLANTISI YAPILMASI LAZIM UPDATE BAĞLANTI YAPILDI AMA VERİYİ SİLMİYOR.
         if(orderServiceClient.hasCustomerProduct(nationalityId))
             throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.CUSTOMER_HAS_PRODUCT));
     }
