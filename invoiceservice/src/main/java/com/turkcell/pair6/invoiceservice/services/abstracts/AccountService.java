@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface AccountService {
-    List<AccountResponse> getAll(Pageable pageable);
+    List<AccountResponse> findAllByIsActiveTrue(Pageable pageable);
 
     void add(AddBillingRequest request);
 

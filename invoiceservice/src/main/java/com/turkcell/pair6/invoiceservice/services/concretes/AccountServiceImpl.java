@@ -29,11 +29,11 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final CustomerServiceClient customerServiceClient;
     private final MessageService messageService;
-    private final AccountBusinessRules businessRules;
+    private final AccountBusinessRules accountBusinessRules;
 
     @Override
-    public List<AccountResponse> getAll(Pageable pageable) {
-        Page<Account> accountPage = accountRepository.findAll(pageable);
+    public List<AccountResponse> findAllByIsActiveTrue(Pageable pageable) {
+        Page<Account> accountPage = accountRepository.findAllByIsActiveTrue(pageable);
         return accountPage.map(AccountMapper.INSTANCE::accountResponseFromAccount).getContent();
     }
 
@@ -49,19 +49,23 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public String delete(int id) {
-        businessRules.hasAccountProduct(id);
-        accountRepository.deleteById(id);
-        return messageService.getMessage(Messages.ACCOUNT_DELETED);
+        accountBusinessRules.isAccountIdExist(id);
+        accountBusinessRules.hasAccountProduct(id);
+        accountRepository.deactivateByAccountId(id);
+        return messageService.getMessage(Messages.BusinessErrors.ACCOUNT_DELETED);
     }
 
     @Override
     public void update(UpdateAccountRequest request) {
-        Optional<Account> optionalAccount = accountRepository.findById(request.getId());
+        accountBusinessRules.isAccountIdExist(request.getId());
+
+        Optional<Account> optionalAccount = accountRepository.findActiveAccountById(request.getId());
         Account account = optionalAccount.orElse(null);
 
         Account updatedAccount = AccountMapper.INSTANCE.accountFromUpdateRequest(request , account);
         UpdateAddressRequest addressRequest = AddressMapper.INSTANCE.updateAddress(request.getAddress());
         addressRequest.setId(account.getAddressId());
+
         customerServiceClient.update(addressRequest);
         accountRepository.save(updatedAccount);
     }

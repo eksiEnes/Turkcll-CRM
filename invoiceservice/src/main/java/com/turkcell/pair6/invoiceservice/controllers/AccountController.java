@@ -20,7 +20,7 @@ public class AccountController {
     @GetMapping
     public List<AccountResponse> getAll(@RequestParam(defaultValue = "0") int pageNumber,
                                         @RequestParam(defaultValue = "10") int pageSize) {
-        return accountService.getAll(PageRequest.of(pageNumber, pageSize));
+        return accountService.findAllByIsActiveTrue(PageRequest.of(pageNumber, pageSize));
     }
 
     @PostMapping
