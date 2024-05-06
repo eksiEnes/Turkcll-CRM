@@ -26,6 +26,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE Product p SET p.isActive = false WHERE p.id = :productNo")
+    @Query("UPDATE Product p SET p.isActive = false, p.deletedDate = CURRENT_TIMESTAMP WHERE p.id = :productNo")
     void deactivateByProductNo(@Param("productNo") int productNo);
 }
