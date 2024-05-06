@@ -27,7 +27,7 @@ public class ProductsController {
     @GetMapping("/products")
     public List<ProductResponse> getAllProduct(@RequestParam(defaultValue = "0") int pageNumber,
                                         @RequestParam(defaultValue = "10") int pageSize){
-        return productService.getAllProduct(PageRequest.of(pageNumber, pageSize));
+        return productService.getAllProductActive(PageRequest.of(pageNumber, pageSize));
 
     }
 
