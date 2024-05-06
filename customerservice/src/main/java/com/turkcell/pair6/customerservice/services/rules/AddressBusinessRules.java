@@ -27,20 +27,29 @@ public class AddressBusinessRules {
 
     public void isAddressIdExist(int id){
 
-        Optional<Address> optionalAddress = addressRepository.findById(id);
+        Optional<Address> optionalAddress = addressRepository.findActiveAddressById(id);
         Address address = optionalAddress.orElse(null);
 
         if (address == null)
-            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.ADDRESS_DOES_NOT_EXİST));
+            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.ADDRESS_DOES_NOT_EXIST));
 
     }
 
     public void hasCustomerMoreThanOneAddress(int id) {
 
-        Optional<Address> optionalAddress = addressRepository.findPrimaryAddressesByCustomerId(id);
+        Optional<Address> optionalAddress = addressRepository.findActiveAddressById(id);
         Address address = optionalAddress.orElse(null);
 
-        if (address.getCustomer().getAddresses().size() <= 1)
+
+        List<Address> adressList= address.getCustomer().getAddresses();
+        int isActiveCount = 0;
+        for (Address active:
+             adressList) {
+            if(active.isActive()){
+                isActiveCount++;
+            }
+        }
+        if (isActiveCount <= 1 )
             throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.CUSTOMER_HAS_NOT_MORE_THAN_ONE_ADDRESS));
     }
 
@@ -52,11 +61,12 @@ public class AddressBusinessRules {
         List<Address> optionalAddress = addressRepository.findByCustomerIdAndIsprimaryTrue(id);
 
         if (optionalAddress == null)
-            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.ADDRESS_DOES_NOT_EXİST));
+            throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.ADDRESS_DOES_NOT_EXIST));
 
 
         return optionalAddress;
 
     }
+
 }
 

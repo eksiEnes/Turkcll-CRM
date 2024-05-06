@@ -24,11 +24,11 @@ public class AddressController {
     @GetMapping
     public List<AddressResponse> getAll(@RequestParam(defaultValue = "0") int pageNumber,
                                         @RequestParam(defaultValue = "10") int pageSize) {
-        return addressService.getAll(PageRequest.of(pageNumber, pageSize));
+        return addressService.getAllActive(PageRequest.of(pageNumber, pageSize));
     }
 
     @GetMapping("getById")
-    public Optional<Address> getById(int id){
+    public AddressResponse getById(int id){
         return addressService.getById(id);
     }
 

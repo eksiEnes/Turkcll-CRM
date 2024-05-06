@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AddressService {
-    List<AddressResponse> getAll(Pageable pageable);
+    List<AddressResponse> getAllActive(Pageable pageable);
 
     int add(AddAddressRequest request);
 
@@ -24,5 +24,5 @@ public interface AddressService {
 
     void setprimary(SetPrimaryAdressRequest request);
 
-    Optional<Address> getById(int id);
+    AddressResponse getById(int id);
 }

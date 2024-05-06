@@ -1,7 +1,6 @@
 package com.turkcell.pair6.customerservice.services.concretes;
 
 import com.turkcell.pair6.customerservice.entities.Address;
-import com.turkcell.pair6.customerservice.entities.Customer;
 import com.turkcell.pair6.customerservice.repositories.AddressRepository;
 import com.turkcell.pair6.customerservice.services.abstracts.AddressService;
 import com.turkcell.pair6.customerservice.services.dtos.requests.AddAddressRequest;
@@ -24,9 +23,8 @@ public class AddressServiceImpl implements AddressService {
     private final AddressRepository addressRepository;
     private final AddressBusinessRules addressBusinessRules;
 
-    @Override
-    public List<AddressResponse> getAll(Pageable pageable) {
-        Page<Address> addressPage = addressRepository.findAll(pageable);
+    public List<AddressResponse> getAllActive(Pageable pageable) {
+        Page<Address> addressPage = addressRepository.findAllByIsActiveTrue(pageable);
         return addressPage.map(AddressMapper.INSTANCE::addressResponseFromAddress).getContent();
     }
 
@@ -40,14 +38,18 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void delete(int id) {
+        addressBusinessRules.isAddressIdExist(id);
         addressBusinessRules.hasCustomerMoreThanOneAddress(id);
         addressRepository.deactivateByAddressId(id);
     }
 
     @Override
     public void update(UpdateAddressRequest request) {
-        Optional<Address> optionalAddress = addressRepository.findById(request.getId());
+        addressBusinessRules.isAddressIdExist(request.getId());
+
+        Optional<Address> optionalAddress = addressRepository.findActiveAddressById(request.getId());
         Address address = optionalAddress.orElse(null);
+
 
         Address updatedAddress = AddressMapper.INSTANCE.addressFromUpdateRequest(request , address);
         addressRepository.save(updatedAddress);
@@ -74,8 +76,12 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Optional<Address> getById(int id) {
-        return addressRepository.findById(id);
+    public AddressResponse getById(int id) {
+        addressBusinessRules.isAddressIdExist(id);
+        Optional<Address> optionalAddress = addressRepository.findActiveAddressById(id);
+        Address address = optionalAddress.orElse(null);
+
+        return AddressMapper.INSTANCE.addressResponseFromAddress(address);
     }
 
 
