@@ -23,7 +23,7 @@ public class CustomerBusinessRules {
 
     public void customerNatIdExist(String nationalityId)
     {
-        Optional<IndividualCustomer> customer = customerRepository.findByNationalityId(nationalityId);
+        Optional<IndividualCustomer> customer = customerRepository.findActiveCustomerByNationalityId(nationalityId);
 
         if(customer.isEmpty())
             throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.CUSTOMER_NATID_EXIST));
@@ -38,13 +38,14 @@ public class CustomerBusinessRules {
 
     public void customerWithSameNationalityIdCanNotExist(String nationalityId)
     {
-        Optional<IndividualCustomer> customer = customerRepository.findByNationalityId(nationalityId);
+        Optional<IndividualCustomer> customer = customerRepository.findActiveCustomerByNationalityId(nationalityId);
 
         if(customer.isPresent())
             throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.CUSTOMER_EXIST_WITH_SAME_NATID));
     }
 
     public void hasCustomerProduct(String nationalityId) {
+        // TODO FEIGN CLIENT BAGLANTISI YAPILMASI LAZIM UPDATE BAĞLANTI YAPILDI AMA VERİYİ SİLMİYOR.
         if(orderServiceClient.hasCustomerProduct(nationalityId))
             throw new BusinessException(messageService.getMessage(Messages.BusinessErrors.CUSTOMER_HAS_PRODUCT));
     }

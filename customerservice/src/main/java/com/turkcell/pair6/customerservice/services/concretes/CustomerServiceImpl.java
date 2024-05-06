@@ -27,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<AddCustomerResponse> getAll(Pageable pageable) {
-        Page<IndividualCustomer> customerPage = customerRepository.findAll(pageable);
+        Page<IndividualCustomer> customerPage = customerRepository.findAllByIsActiveTrue(pageable);
         return customerPage.map(CustomerMapper.INSTANCE::customerResponseFromCustomer).getContent();
     }
 
@@ -58,7 +58,7 @@ public class CustomerServiceImpl implements CustomerService {
     public AddCustomerResponse update(UpdateCustomerRequest request) {
         customerBusinessRules.customerNatIdExist(request.getNationalityId());
 
-        Optional<IndividualCustomer> optionalCustomer = customerRepository.findByNationalityId(request.getNationalityId());
+        Optional<IndividualCustomer> optionalCustomer = customerRepository.findActiveCustomerByNationalityId(request.getNationalityId());
         IndividualCustomer individualCustomer = optionalCustomer.orElse(null);
 
         IndividualCustomer updatedCustomer = CustomerMapper.INSTANCE.customerFromUpdateRequest(request, individualCustomer);
